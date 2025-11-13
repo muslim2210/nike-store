@@ -1,4 +1,5 @@
 import Heading from "@/components/custom/Heading";
+import HeroBanner from "@/components/custom/slider/HeroBanner";
 import Slider from "@/components/custom/slider/Slider";
 
 
@@ -13,6 +14,7 @@ export default function Home() {
           "Meet the latest collection of retro running inspired shoes.The unlikely heroes of your easiest styling hack."
         }
       />
+      <HeroBanner />
     </main>
   );
 }

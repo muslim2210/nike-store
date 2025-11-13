@@ -1,13 +1,10 @@
 "use client";
 import { CollectionType } from "@/types/model";
-import axios from "axios";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import api from "@/lib/axios";
+import { useFetch } from "@/hooks/useFetch";
 
 type Props = {
   showCatMenu: boolean;
@@ -15,28 +12,14 @@ type Props = {
 };
 
 const MenuLink = ({ showCatMenu, setShowCatMenu }: Props) => {
-  const [loading, setLoading] = useState(false);
-  const [collections, setCollections] = useState<CollectionType[]>([]);
-
-const fetchCollections = async () => {
-    setLoading(true);
-    try {
-      const res = await api.get("/api/collections");
-      console.info("[collections_GET]", res);
-      setCollections(res.data.data as CollectionType[]);
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch(err: any) {
-      console.error("[collections_GET]", err)
-      toast.error(err.message || err || "Something went wrong, please try again.");
-    } finally {
-      setLoading(false);
+  const { data: collections, loading } = useFetch({
+    url: "/api/collections",
+    params: {
+      fields: ["id", "name"],
+      withCount: true,
+      all: true
     }
-  };
-  
-
-  useEffect(() => {
-    fetchCollections();
-  }, []);
+  });
 
   return (
     <ul className="hidden md:flex items-center gap-5 font-medium text-black text-base p-4">
@@ -62,7 +45,7 @@ const fetchCollections = async () => {
             <BsChevronDown size={14} />
             {showCatMenu && (
               <div className="bg-white absolute top-6 left-0 min-w-[250px] py-1 text-black shadow-lg">
-                {collections?.map((collection) => {
+                {collections.map((collection: CollectionType) => {
                   return (
                     <Link
                       key={collection.id}
@@ -70,9 +53,9 @@ const fetchCollections = async () => {
                       onClick={() => setShowCatMenu(false)}
                     >
                       <div className="h-12 flex justify-between items-center px-5 hover:bg-black/[0.03] rounded-md">
-                        {collection.title}
+                        {collection.name}
                         <span className="opacity-50 text-sm">
-                          {`(${collection?.products?.length})`}
+                          {`(${collection?.products_count})`}
                         </span>
                       </div>
                     </Link>

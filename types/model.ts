@@ -3,11 +3,12 @@
 // ==========================
 export type CollectionType = {
   id: string;
-  title: string;
+  name: string;
   description: string;
   image: string;
   createdAt: Date;
   updatedAt: Date;
+  products_count?: number;
   products?: ProductType[]; // relasi: optional untuk efisiensi
 };
 
@@ -18,15 +19,15 @@ export interface ProductType {
   id: string;
   title: string;
   description: string;
-  media: string[];
+  images: string[];
   tags: string[];
   sizes: string[];
   colors: string[];
   price: number;
-  expense: number;
+  quantity: number;
   createdAt: Date;
   updatedAt: Date;
-  collectionId: string;
+  collection_id: string;
   collection?: CollectionType; // optional untuk include() Prisma
   orderItems?: OrderItemType[];
 };

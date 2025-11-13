@@ -14,7 +14,7 @@ import { useState } from "react";
 import Wrapper from "./Wrapper";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
-
+import { Button } from "../ui/button";
 
 const SearchModal = () => {
 
@@ -53,7 +53,7 @@ const SearchModal = () => {
           />
 
           <div className="flex items-center relative mt-5 md:mt-0 lg:mr-2">
-            <input
+            <Input
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
@@ -63,7 +63,7 @@ const SearchModal = () => {
               className="px-4 py-2 w-[250px] md:w-[350px] lg:w-[700px] text-sm rounded-full bg-primaryGray"
             />
             <AlertDialogAction className="bg-trasparent hover:bg-trasparent relative">
-              <button
+              <Button
                 disabled={query === ""}
                 onClick={() => {
                   router.push(`/search/${query}`);
@@ -72,7 +72,7 @@ const SearchModal = () => {
                 className="flex items-center"
               >
                 <Search className="text-primaryBlack w-5 h-5 ml-2 cursor-pointer absolute right-10 hover:text-primaryRed" />
-              </button>
+              </Button>
             </AlertDialogAction>
           </div>
 
