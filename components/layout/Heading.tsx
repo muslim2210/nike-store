@@ -1,5 +1,5 @@
 "use client";
-import Wrapper from "../layout/Wrapper";
+import Wrapper from "./Wrapper";
 
 type Props = {
   span: string;

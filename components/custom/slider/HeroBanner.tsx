@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import { BiArrowBack } from "react-icons/bi";
 import Image from "next/image";
+import Wrapper from "@/components/layout/Wrapper";
 
 const banner = [
   {
@@ -24,7 +25,7 @@ const banner = [
 
 const HeroBanner = () => {
   return (
-    <div className="relative text-white text-[20px] w-full max-w-[1360px] mx-auto">
+    <Wrapper className="relative text-white text-[20px]">
       <Carousel
         autoPlay={true}
         infiniteLoop={true}
@@ -64,7 +65,7 @@ const HeroBanner = () => {
           </div>
         ))}
       </Carousel>
-    </div>
+    </Wrapper>
   );
 };
 

@@ -27,7 +27,7 @@ export function useFetch<T = any>({ url, params = {}, immediate = true }: UseFet
       const payload = res.data?.data?.data || res.data?.data || res.data;
       setData(payload as T);
       console.info(`[useFetch] Response ${url}:`, res);
-      console.info(`[useFetch] Fetched ${url} data:`, payload);
+      console.info(`[useFetch] payload ${url} data:`, payload);
       return payload;
     } catch (err: any) {
       console.error(`[useFetch] Error fetching ${url}:`, err);

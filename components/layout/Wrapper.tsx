@@ -8,7 +8,7 @@ interface Props {
 const Wrapper = ({ children, className }: Props) => {
   return (
     <div
-      className={`w-full max-w-[1360px] px-5 md:px-10 mx-auto ${
+      className={`w-full max-w-[1360px] px-3 md:px-7 lg:px-12 mx-auto ${
         className || ""
       }`}
     >
