@@ -99,6 +99,7 @@ export interface AuthState {
   customer: CustomerType | null;
   token: string | null;
   loading: boolean;
+  hydrated: boolean;
   init: () => void;
 
   login: (email: string, password: string) => Promise<boolean>;
@@ -120,4 +121,5 @@ export interface WishlistState {
   fetchWishlist: () => Promise<void>;
   toggleWishlist: (productId: number) => Promise<void>;
   isWishlisted: (productId: number) => boolean;
+  clearWishlist: () => void;
 }

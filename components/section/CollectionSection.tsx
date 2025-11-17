@@ -41,55 +41,53 @@ const CollectionSection = () => {
 
 
   return (
-    <Wrapper>
-      <div className="my-16 relative">
-        <div className="text-xl md:text-2xl font-bold mb-5">
-          Shop By Collections 
-        </div>
-        {
-          loading ? (
-          <Button variant="outline" disabled size="sm">
-            <Spinner />
-            Please wait
-          </Button>
-        ) : ( 
-          <Carousel
-            responsive={responsive}
-            containerClass="-mx-[10px]"
-            itemClass="px-[10px] mt-5"
-            arrows={false}
-            renderButtonGroupOutside={true}
-            customButtonGroup={<ButtonGroupCarousel />}
-            infinite={true}
-          >
-            {collections && collections.map((collection: CollectionType) => (
-              <div key={collection.id} className="flex flex-col gap-3">             
-                <Link
-                  href={`/collections/${collection.id}`}
-                  key={collection.id}
-                  className=""
-                >
-                  <div className="relative aspect-4/3 w-full max-w-[400px] overflow-hidden rounded-lg">
-                    {collection.image && (
-                      <Image
-                        key={collection.id}
-                        src={collection.image}
-                        alt={collection.name}
-                        fill
-                        priority
-                        className="object-cover object-center"
-                      />
-                    )}
-                  </div>
-                </Link>
-                <h2 className="text-primaryBlack font-medium text-2xl oswald">
-                  {collection.name}
-                </h2>
-              </div>
-            ))}
-          </Carousel>
-        )}
+    <Wrapper className="my-16 relative">
+      <div className="text-xl md:text-2xl font-bold mb-5">
+        Shop By Collections 
       </div>
+      {
+        loading ? (
+        <Button variant="outline" disabled size="sm">
+          <Spinner />
+          Please wait
+        </Button>
+      ) : ( 
+        <Carousel
+          responsive={responsive}
+          containerClass="-mx-[10px]"
+          itemClass="px-[10px] mt-5"
+          arrows={false}
+          renderButtonGroupOutside={true}
+          customButtonGroup={<ButtonGroupCarousel />}
+          infinite={true}
+        >
+          {collections && collections.map((collection: CollectionType) => (
+            <div key={collection.id} className="flex flex-col gap-3">             
+              <Link
+                href={`/collections/${collection.id}`}
+                key={collection.id}
+                className=""
+              >
+                <div className="relative aspect-4/3 w-full max-w-[400px] overflow-hidden rounded-lg">
+                  {collection.image && (
+                    <Image
+                      key={collection.id}
+                      src={collection.image}
+                      alt={collection.name}
+                      fill
+                      priority
+                      className="object-cover object-center"
+                    />
+                  )}
+                </div>
+              </Link>
+              <h2 className="text-primaryBlack font-medium text-2xl oswald">
+                {collection.name}
+              </h2>
+            </div>
+          ))}
+        </Carousel>
+      )}
     </Wrapper>
   )
 }

@@ -22,7 +22,7 @@ const MenuLink = ({ showCatMenu, setShowCatMenu }: Props) => {
   });
 
   return (
-    <ul className="hidden md:flex items-center gap-5 font-medium text-black text-base p-4">
+    <ul className="flex flex-col lg:flex-row lg:items-center gap-5 font-medium text-black text-base p-4 border-gray-300 border-b lg:border-none">
       <li className="cursor-pointer">
         <Link href="/">Home</Link>
       </li>
@@ -52,7 +52,7 @@ const MenuLink = ({ showCatMenu, setShowCatMenu }: Props) => {
                       href={`/collections/${collection.id}`}
                       onClick={() => setShowCatMenu(false)}
                     >
-                      <div className="h-12 flex justify-between items-center px-5 hover:bg-black/[0.03] rounded-md">
+                      <div className="h-12 flex justify-between items-center px-5 hover:bg-black/3 rounded-md">
                         {collection.name}
                         <span className="opacity-50 text-sm">
                           {`(${collection?.products_count})`}

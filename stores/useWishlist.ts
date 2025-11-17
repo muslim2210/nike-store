@@ -14,7 +14,7 @@ export const useWishlist = create<WishlistState>((set, get) => ({
       const res = await api.get("/api/wishlist");
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const productIds = res.data.data.map((p: any) => p.product_id);
+      const productIds = res.data.data.map((p: any) => p.id);
 
       set({ wishlist: productIds });
     } catch (err) {
@@ -47,5 +47,9 @@ export const useWishlist = create<WishlistState>((set, get) => ({
 
   isWishlisted: (productId) => {
     return get().wishlist.includes(productId);
+  },
+
+  clearWishlist: () => {
+    set({ wishlist: [] });
   },
 }));
