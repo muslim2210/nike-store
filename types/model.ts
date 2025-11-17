@@ -13,6 +13,18 @@ export type CollectionType = {
 };
 
 // ==========================
+// 👤 Customer
+// ==========================
+export type CustomerType = {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+  address?: string;
+  phone?: string;
+};
+
+// ==========================
 // 🛍️ Product
 // ==========================
 export interface ProductType {
@@ -81,4 +93,31 @@ export type UserModel = {
   orders?: OrderType[];
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface AuthState {
+  customer: CustomerType | null;
+  token: string | null;
+  loading: boolean;
+  init: () => void;
+
+  login: (email: string, password: string) => Promise<boolean>;
+  register: (data: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    password: string;
+  }) => Promise<boolean>;
+  logout: () => void;
+}
+
+
+export interface WishlistState {
+  wishlist: number[]; // only product IDs
+  loading: boolean;
+
+  fetchWishlist: () => Promise<void>;
+  toggleWishlist: (productId: number) => Promise<void>;
+  isWishlisted: (productId: number) => boolean;
 }

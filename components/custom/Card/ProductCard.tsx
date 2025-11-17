@@ -2,9 +2,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ProductType } from "@/types/model";
-import { FaRegHeart } from "react-icons/fa";
 import { formatRupiah } from "@/hooks/formatRupiah";
-// import HeartWishlist from "./HeartWishlist";
+import WishlistButton from "../Button/WishlistButton";
 
 interface ProductCardProps {
   product: ProductType;
@@ -31,7 +30,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
       </Link>
-      <div className="py-4 px-2 flex flex-col gap-2">
+      <div className="py-4 px-2 flex flex-col gap-1">
         <h2 className="text-sm md:text-lg font-medium text-primaryBlack">
           {product.title}
         </h2>
@@ -39,14 +38,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {product.collection?.name}
         </span>
         <div className="flex items-center justify-between">
-          <p className="mr-2 text-sm md:text-lg font-semibold">
-            Rp. {formatRupiah(product.price)}
+          <p className="mr-2 text-sm md:text-lg font-normal text-gray-700">
+            {formatRupiah(product.price)}
           </p>
-          <FaRegHeart className="text-red-500 h-6 w-6"/>
-          {/* <HeartWishlist
-            product={product}
-            updateSignedInUser={updateSignedInUser}
-          /> */}
+          <WishlistButton productId={Number(product.id)} />
 
         </div>
       </div>

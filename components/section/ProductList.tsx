@@ -13,7 +13,6 @@ const ProductList = () => {
         url: "/api/products",
         params: {
           fields: ["id", "title", "price", "images"],
-          all: true
         }
     });
   
@@ -50,7 +49,7 @@ const ProductList = () => {
             <Carousel
               responsive={responsive}
               containerClass="-mx-[10px]"
-              itemClass="px-[10px] mt-5"
+              itemClass="px-1 md:px-3 mt-5"
               infinite={true}
             >
               {(products ?? []).map((product: ProductType) => (
