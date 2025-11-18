@@ -7,6 +7,8 @@ import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
 import { ProductType } from "@/types/model";
 import ProductCard from "../custom/Card/ProductCard";
+import CustomLeftArrow from "../custom/Button/CustomLeftArrow";
+import CustomRightArrow from "../custom/Button/CustomRightArrow";
 
 const ProductList = () => {
   const { data: products, loading } = useFetch({
@@ -15,6 +17,7 @@ const ProductList = () => {
           fields: ["id", "title", "price", "images"],
         }
     });
+
   
       const responsive = {
         desktop: {
@@ -51,6 +54,8 @@ const ProductList = () => {
               containerClass="-mx-[10px]"
               itemClass="px-1 md:px-3 mt-5"
               infinite={true}
+              customLeftArrow={<CustomLeftArrow />}
+              customRightArrow={<CustomRightArrow />}
             >
               {(products ?? []).map((product: ProductType) => (
                 <ProductCard key={product.id} product={product} />

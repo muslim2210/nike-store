@@ -12,11 +12,12 @@ import { ProductType } from '@/types/model';
 const WishlistPage = () => {
   const { data: wishlist, loading } = useFetch({
           url: "/api/wishlist",
-    });
+  });
+
 
   return (
     <Wrapper className='my-8 md:my-12 min-h-screen'>
-      <HeaderSection title='Wishlist Page'/>
+      <HeaderSection title='Wishlist Page' totalProduct={wishlist?.length} />
 
         {/* products grid start */}
         {loading ? (

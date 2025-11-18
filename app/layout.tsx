@@ -7,7 +7,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { useEffect } from "react";
 import { useCustomerAuth } from "@/stores/useCustomerAuth";
-import { useWishlist } from "@/stores/useWishlist";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 

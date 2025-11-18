@@ -44,6 +44,9 @@ export const useCustomerAuth = create(
           set({ token }); // persist akan simpan auto
           api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 
+          // simpan token di cookie agar middleware bisa baca
+          document.cookie = `customer_token=${token}; path=/;`;
+
           const me = await api.get("/api/customer/profile");
           const customer = me.data;
 
@@ -87,13 +90,13 @@ export const useCustomerAuth = create(
       },
 
       logout: () => {
-        const store = useCustomerAuth.getState();
         set({ token: null, customer: null });
         
         // ❗ Reset storage persist
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (useCustomerAuth as any).persist?.clearStorage();
 
+        document.cookie = "customer_token=; Max-Age=0; path=/;";
         delete api.defaults.headers.common["Authorization"];
         useWishlist.getState().clearWishlist();
         toast.success("You are logged out");

@@ -14,10 +14,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useCustomerAuth } from "@/stores/useCustomerAuth";
+import { useRouter } from "next/navigation";
 import { FaCircleUser } from "react-icons/fa6";
 
 const UserButton = () => {
   const auth = useCustomerAuth();
+  const router = useRouter();
 
   return (
     <>
@@ -51,7 +53,10 @@ const UserButton = () => {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => auth.logout()}>
+            <DropdownMenuItem onClick={() => {
+              auth.logout();
+              router.push("/");
+            } }>
               Log out
               <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
             </DropdownMenuItem>

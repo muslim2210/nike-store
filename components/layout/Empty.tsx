@@ -1,5 +1,4 @@
 import { LuFolderHeart } from "react-icons/lu";
-import { ArrowUpRightIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Empty,
