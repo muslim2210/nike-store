@@ -3,12 +3,12 @@
 import { Heart } from "lucide-react";
 import { useWishlist } from "@/stores/useWishlist";
 import { useCustomerAuth } from "@/stores/useCustomerAuth";
-import { useState } from "react";
 import LoginRegisterDialog from "@/components/layout/LoginRegisterDialog";
+import { useState } from "react";
 
 
 export default function WishlistButton({ productId }: { productId: number }) {
-  const { isWishlisted, toggleWishlist } = useWishlist();
+  const { isWishlisted, toggleWishlist, hydrated } = useWishlist();
   const { customer } = useCustomerAuth();
 
   const [open, setOpen] = useState(false);
@@ -22,6 +22,8 @@ export default function WishlistButton({ productId }: { productId: number }) {
   };
 
   const active = isWishlisted(productId);
+
+  if (!hydrated) return null;
 
   return (
     <>

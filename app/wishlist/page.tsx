@@ -1,48 +1,57 @@
 'use client'
+import { CardLoading } from '@/components/custom/Card/CardLoading';
 import ProductCard from '@/components/custom/Card/ProductCard';
 import EmptyComponent from '@/components/layout/Empty';
 import Wrapper from '@/components/layout/Wrapper'
 import HeaderSection from '@/components/section/HeaderSection'
-import { Button } from '@/components/ui/button';
-import { Spinner } from '@/components/ui/spinner';
 import { useFetch } from '@/hooks/useFetch';
+import { useWishlist } from '@/stores/useWishlist';
 import { ProductType } from '@/types/model';
+import { useEffect } from 'react';
 
 
 const WishlistPage = () => {
-  const { data: wishlist, loading } = useFetch({
-          url: "/api/wishlist",
+  // ambil data dari API
+  const { data: apiWishlist, loading } = useFetch({
+    url: "/api/wishlist",
   });
 
+  // ambil store wishlist (ID array)
+  const { wishlist, hydrateWishlist } = useWishlist();
+
+  // saat API selesai → hydrate ke store
+  useEffect(() => {
+    if (apiWishlist) {
+      hydrateWishlist(apiWishlist); // apiWishlist = array product
+    }
+  }, [apiWishlist, hydrateWishlist]);
 
   return (
     <Wrapper className='my-8 md:my-12 min-h-screen'>
-      <HeaderSection title='Wishlist Page' totalProduct={wishlist?.length} />
+      <HeaderSection title='Wishlist Page' totalProduct={wishlist.length} />
 
-        {/* products grid start */}
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 my-8 md:my-14 md:px-0">
         {loading ? (
-          <Button variant="outline" disabled size="sm">
-            <Spinner />
-            Please wait
-          </Button>
+          <CardLoading count={8} />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 my-8 md:my-14 md:px-0">
-            {wishlist?.map((product: ProductType) => (
+          <>
+            {apiWishlist?.filter((product: ProductType) =>
+              wishlist.includes(product.id)
+            ).map((product: ProductType) => (
               <ProductCard
                 key={product.id}
                 product={product}
               />
             ))}
-          </div>
+          </>
         )}
+      </div>
 
-        {
-          wishlist && wishlist.length === 0 && (
-           <EmptyComponent title='Wishlist is Empty'/>
-          )
-        }
+      {apiWishlist && wishlist.length === 0 && (
+        <EmptyComponent title='Wishlist is Empty' />
+      )}
     </Wrapper>
   )
 }
 
-export default WishlistPage
+export default WishlistPage;

@@ -1,11 +1,12 @@
 import { create } from "zustand";
 import api from "@/lib/axios";
 import { toast } from "sonner";
-import { WishlistState } from "@/types/model";
+import { ProductType, WishlistState } from "@/types/model";
 
 export const useWishlist = create<WishlistState>((set, get) => ({
   wishlist: [],
   loading: false,
+  hydrated: false,
 
   fetchWishlist: async () => {
     set({ loading: true });
@@ -16,9 +17,10 @@ export const useWishlist = create<WishlistState>((set, get) => ({
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const productIds = res.data.data.map((p: any) => p.id);
 
-      set({ wishlist: productIds });
+      set({ wishlist: productIds, hydrated: true });
     } catch (err) {
       console.error("[FETCH WISHLIST FAILED]", err);
+      set({ hydrated: true });
     } finally {
       set({ loading: false });
     }
@@ -26,8 +28,8 @@ export const useWishlist = create<WishlistState>((set, get) => ({
 
   toggleWishlist: async (productId) => {
     const { wishlist } = get();
-
     const isAdded = wishlist.includes(productId);
+    set({ hydrated: true });
 
     try {
       if (isAdded) {
@@ -50,6 +52,11 @@ export const useWishlist = create<WishlistState>((set, get) => ({
   },
 
   clearWishlist: () => {
-    set({ wishlist: [] });
+    set({ wishlist: [], hydrated: true });
+  },
+
+  hydrateWishlist: (products: ProductType[]) => {
+    const ids = products.map((p) => p.id);
+    set({ wishlist: ids, hydrated: true });
   },
 }));

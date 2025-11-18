@@ -4,20 +4,18 @@ import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Wrapper from "../layout/Wrapper";
-// import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Link from "next/link";
 import { useFetch } from "@/hooks/useFetch";
-import { Button } from "../ui/button";
-import { Spinner } from "../ui/spinner";
 import { CollectionType } from "@/types/model";
 import ButtonGroupCarousel from "../custom/Button/ButtonGroupCarousel";
+import { CardLoading } from "../custom/Card/CardLoading";
 
 const CollectionSection = () => {
   const { data: collections, loading } = useFetch({
       url: "/api/collections",
       params: {
         fields: ["id", "name", "image"],
-        all: true
+        all: true,
       }
   });
 
@@ -47,10 +45,9 @@ const CollectionSection = () => {
       </div>
       {
         loading ? (
-        <Button variant="outline" disabled size="sm">
-          <Spinner />
-          Please wait
-        </Button>
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 md:gap-6 lg:grid-cols-3 py-5">
+          <CardLoading count={4} />
+        </div>
       ) : ( 
         <Carousel
           responsive={responsive}

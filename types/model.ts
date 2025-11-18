@@ -16,7 +16,7 @@ export type CollectionType = {
 // 👤 Customer
 // ==========================
 export type CustomerType = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -28,7 +28,7 @@ export type CustomerType = {
 // 🛍️ Product
 // ==========================
 export interface ProductType {
-  id: string;
+  id: number;
   title: string;
   description: string;
   images: string[];
@@ -48,8 +48,8 @@ export interface ProductType {
 // 🧾 Order
 // ==========================
 export type OrderType = {
-  id: string;
-  userId: string;
+  id: number;
+  userId: number;
   totalAmount: number;
   createdAt: Date;
   updatedAt: Date;
@@ -61,7 +61,7 @@ export type OrderType = {
 // 📦 Order Item
 // ==========================
 export type OrderItemType = {
-  id: string;
+  id: number;
   orderId: string;
   productId: string;
   title: string;
@@ -75,14 +75,14 @@ export type OrderItemType = {
 
 
 export type UserAuth = {
-  name: string;
+  name: number;
   email: string;
   token: string;
   role: "ADMIN" | "CUSTOMER";
 }
 
 export type UserModel = {
-  id: string;
+  id: number;
   name: string;
   email: string;
   password: string;
@@ -117,7 +117,8 @@ export interface AuthState {
 export interface WishlistState {
   wishlist: number[]; // only product IDs
   loading: boolean;
-
+  hydrated: boolean;
+  hydrateWishlist: (products: ProductType[]) => void;
   fetchWishlist: () => Promise<void>;
   toggleWishlist: (productId: number) => Promise<void>;
   isWishlisted: (productId: number) => boolean;

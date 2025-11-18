@@ -3,18 +3,18 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Wrapper from "../layout/Wrapper";
 import { useFetch } from "@/hooks/useFetch";
-import { Button } from "../ui/button";
-import { Spinner } from "../ui/spinner";
 import { ProductType } from "@/types/model";
 import ProductCard from "../custom/Card/ProductCard";
 import CustomLeftArrow from "../custom/Button/CustomLeftArrow";
 import CustomRightArrow from "../custom/Button/CustomRightArrow";
+import { CardLoading } from "../custom/Card/CardLoading";
 
 const ProductList = () => {
   const { data: products, loading } = useFetch({
         url: "/api/products",
         params: {
           fields: ["id", "title", "price", "images"],
+          with: ["collection"],
         }
     });
 
@@ -44,10 +44,9 @@ const ProductList = () => {
           All Featured Products
         </div>
         {loading ? (
-            <Button variant="outline" disabled size="sm">
-              <Spinner />
-              Please wait
-            </Button>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-5 lg:grid-cols-4 py-5">
+              <CardLoading count={4} />
+            </div>
           ) : products && products.length > 0 ? (
             <Carousel
               responsive={responsive}
