@@ -16,7 +16,7 @@ export default function HeaderSection({ title, totalProduct }: Props) {
         <h2 className="text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
           {title}
         </h2>
-        <div className="mt-1 flex flex-col md:flex-row gap-1 flex-wrap">
+        <div className="mt-1 flex flex-col md:flex-row gap-1 md:gap-4 flex-wrap">
           <div className="md:mt-2 flex items-center text-sm text-gray-500">
             <FaUser aria-hidden="true" className="mr-1.5 w-4 h-4 shrink-0 text-gray-400" />
             {auth.customer?.name || "User"}

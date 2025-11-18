@@ -1,5 +1,4 @@
 "use client";
-
 import { Heart } from "lucide-react";
 import { useWishlist } from "@/stores/useWishlist";
 import { useCustomerAuth } from "@/stores/useCustomerAuth";
@@ -13,17 +12,18 @@ export default function WishlistButton({ productId }: { productId: number }) {
 
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    if (!customer) {
-      setOpen(true); // open login/register dialog
-      return;
-    }
-    toggleWishlist(productId);
-  };
+  if (!hydrated) return null;          // tunggu zustand siap
 
   const active = isWishlisted(productId);
 
-  if (!hydrated) return null;
+  const handleClick = () => {
+    if (!customer) {
+      setOpen(true);
+      return;
+    }
+
+    toggleWishlist(productId);        
+  };
 
   return (
     <>

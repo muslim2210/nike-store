@@ -30,7 +30,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           )}
         </div>
       </Link>
-      <div className="py-4 px-2 flex flex-col gap-1">
+      <div className="py-3 px-2 flex flex-col gap-1">
         <h2 className="text-sm md:text-lg font-medium text-primaryBlack">
           {product.title}
         </h2>
@@ -38,7 +38,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {product.collection?.name}
         </span>
         <div className="flex items-center justify-between">
-          <p className="mr-2 text-sm md:text-lg font-normal text-gray-700">
+          <p className="mr-2 text-xs md:text-lg font-normal text-gray-700">
             {formatRupiah(product.price)}
           </p>
           <WishlistButton productId={Number(product.id)} />

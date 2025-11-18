@@ -148,7 +148,7 @@ const Footer = () => {
               </div>
               {midMenu.map((item) => (
                 <div
-                  className="text-sm text-white/[0.5] hover:text-white cursor-pointer capitalize"
+                  className="text-sm text-white/50 hover:text-white cursor-pointer capitalize"
                   key={item.id}
                 >
                   {item.name}
@@ -164,7 +164,7 @@ const Footer = () => {
               </div>
               {rightMenu.map((item) => (
                 <div
-                  className="text-sm text-white/[0.5] hover:text-white cursor-pointer capitalize"
+                  className="text-sm text-white/50 hover:text-white cursor-pointer capitalize"
                   key={item.id}
                 >
                   {item.name}
@@ -193,7 +193,7 @@ const Footer = () => {
       </Wrapper>
       <Wrapper className="flex justify-between mt-10 flex-col md:flex-row gap-[10px] md:gap-0">
         {/* LEFT START */}
-        <div className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer text-center md:text-left">
+        <div className="text-[12px] text-white/50 hover:text-white cursor-pointer text-center md:text-left">
           © 2025 Nike, Inc. Bukhori Muslim All Rights Reserved
         </div>
         {/* LEFT END */}
@@ -202,7 +202,7 @@ const Footer = () => {
         <div className="flex gap-2 md:gap-5 text-center md:text-left flex-wrap justify-center">
           {BottomMenu.map((item) => (
             <div
-              className="text-[12px] text-white/[0.5] hover:text-white cursor-pointer capitalize"
+              className="text-[12px] text-white/50 hover:text-white cursor-pointer capitalize"
               key={item.id}
             >
               {item.name}

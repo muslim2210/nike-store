@@ -33,7 +33,7 @@ export default function Home() {
           alt="banner"
           priority
           width={1360}
-          height={500}
+          height={300}
         />
       </Wrapper>
       <ProductList />

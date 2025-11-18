@@ -124,3 +124,20 @@ export interface WishlistState {
   isWishlisted: (productId: number) => boolean;
   clearWishlist: () => void;
 }
+
+export interface CartItem {
+  item: ProductType;
+  quantity: number;
+  color?: string | null; // ? means optional
+  size?: string | null; // ? means optional
+}
+
+export interface CartStore {
+  cartItems: CartItem[];
+  addItem: (item: CartItem) => void;
+  removeItem: (idToRemove: number) => void;
+  increaseQuantity: (idToIncrease: number) => void;
+  decreaseQuantity: (idToDecrease: number) => void;
+  clearCart: () => void;
+  hydrated: boolean;
+}

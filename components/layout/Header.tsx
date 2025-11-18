@@ -107,7 +107,7 @@ const Header = () => {
               <Link href="/cart">
                 <div className="w-8 h-8 rounded-full flex justify-center items-center hover:bg-black/5 cursor-pointer relative">
                   <BsCart className="text-[20px]" />
-                  <div className="h-[18px] min-w-[18px] md:min-w-4 rounded-full bg-red-600 absolute top-0 left-5 md:left-6 text-white text-[12px] flex justify-center items-center px-1 py-0.5">
+                  <div className="h-[18px] min-w-[18px] md:min-w-4 rounded-full bg-red-600 absolute top-0 left-5 text-white text-[12px] flex justify-center items-center px-1 py-0.5">
                     12
                   </div>
                 </div>
