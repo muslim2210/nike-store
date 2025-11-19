@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import api from "@/lib/axios";
 import { toast } from "sonner";
+import { AxiosResponse } from "axios";
 
 interface UseFetchOptions {
   url: string;
@@ -12,6 +13,7 @@ interface UseFetchOptions {
 
 export function useFetch<T = any>({ url, params = {}, immediate = true }: UseFetchOptions) {
   const [data, setData] = useState<T | null>(null);
+  const [response, setResponse] = useState<AxiosResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,6 +27,7 @@ export function useFetch<T = any>({ url, params = {}, immediate = true }: UseFet
     try {
       const res = await api.get(url, { params: { ...stableParams, ...customParams } });
       const payload = res.data?.data?.data || res.data?.data || res.data;
+      setResponse(res);
       setData(payload as T);
       console.info(`[useFetch] Response ${url}:`, res);
       console.info(`[useFetch] payload ${url} data:`, payload);
@@ -43,5 +46,5 @@ export function useFetch<T = any>({ url, params = {}, immediate = true }: UseFet
     if (immediate) fetchData();
   }, [fetchData, immediate]);
 
-  return { data, loading, error, refetch: fetchData };
+  return { data, loading, error, refetch: fetchData, response };
 }

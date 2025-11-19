@@ -22,13 +22,20 @@ const WishlistPage = () => {
   // saat API selesai → hydrate ke store
   useEffect(() => {
     if (apiWishlist) {
-      hydrateWishlist(apiWishlist); // apiWishlist = array product
+      hydrateWishlist(apiWishlist); 
     }
   }, [apiWishlist, hydrateWishlist]);
 
   return (
     <Wrapper className='my-8 md:my-12 min-h-screen'>
-      <HeaderSection title='Wishlist Page' totalProduct={wishlist.length} />
+      <HeaderSection title='Wishlist Page' totalProduct={wishlist.length} >
+        <button
+          type="button"
+          className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+        >
+          Checkout
+        </button>
+      </HeaderSection>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 my-8 md:my-14 md:px-0">
         {loading ? (
@@ -48,7 +55,7 @@ const WishlistPage = () => {
       </div>
 
       {apiWishlist && wishlist.length === 0 && (
-        <EmptyComponent title='Wishlist is Empty' />
+        <EmptyComponent title='Wishlist is Empty' isSubtitle subtitle='add wishlist in your cart'/>
       )}
     </Wrapper>
   )

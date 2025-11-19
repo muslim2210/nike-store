@@ -81,6 +81,7 @@ export type UserAuth = {
   role: "ADMIN" | "CUSTOMER";
 }
 
+
 export type UserModel = {
   id: number;
   name: string;
@@ -101,7 +102,6 @@ export interface AuthState {
   loading: boolean;
   hydrated: boolean;
   init: () => void;
-
   login: (email: string, password: string) => Promise<boolean>;
   register: (data: {
     name: string;
@@ -139,5 +139,8 @@ export interface CartStore {
   increaseQuantity: (idToIncrease: number) => void;
   decreaseQuantity: (idToDecrease: number) => void;
   clearCart: () => void;
+  getTotalItems: () => number;
+  getTotalPrice: () => number;
   hydrated: boolean;
+  hydrate: () => void;
 }

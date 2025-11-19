@@ -7,15 +7,15 @@ import { BsCart } from "react-icons/bs";
 import { BiMenuAltRight } from "react-icons/bi";
 import { VscChromeClose } from "react-icons/vsc";
 import Image from "next/image";
-// import MenuMobile from "../section/MenuMobile";
 import MenuLink from "./Menu";
-import SearchModal from "./SearchModal";
+// import SearchModal from "./SearchModal";
 import { useCustomerAuth } from "@/stores/useCustomerAuth";
 // import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import LoginRegisterDialog from "./LoginRegisterDialog";
 import MenuMobile from "../section/MenuMobile";
 import UserButton from "../custom/Button/UserButton";
+import useCart from "@/stores/useCart";
 const Header = () => {
 
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -25,6 +25,7 @@ const Header = () => {
  const [open, setOpen] = useState(false);
 
   const router = useRouter();
+  const cart = useCart();
 
   const controlNavbar = () => {
     if (window.scrollY > 500) {
@@ -77,7 +78,7 @@ const Header = () => {
               />
             </Link>
           </div>
-          <div className="flex-1 hidden lg:flex justify-center">
+          <div className="flex-1 hidden md:flex justify-center">
             <MenuLink
               showCatMenu={showCatMenu}
               setShowCatMenu={setShowCatMenu}
@@ -85,7 +86,7 @@ const Header = () => {
           </div>
 
           <div className="flex-1 gap-3 flex justify-end items-center">
-            <SearchModal />
+            {/* <SearchModal /> */}
             {mobileMenu && (
               <MenuMobile
                 showCatMenu={showCatMenu}
@@ -107,8 +108,8 @@ const Header = () => {
               <Link href="/cart">
                 <div className="w-8 h-8 rounded-full flex justify-center items-center hover:bg-black/5 cursor-pointer relative">
                   <BsCart className="text-[20px]" />
-                  <div className="h-[18px] min-w-[18px] md:min-w-4 rounded-full bg-red-600 absolute top-0 left-5 text-white text-[12px] flex justify-center items-center px-1 py-0.5">
-                    12
+                  <div className="h-[17px] min-w-[17px] md:min-w-4 rounded-full bg-red-600 absolute top-0 left-5 text-white text-[11px] flex justify-center items-center px-1">
+                    {cart.getTotalItems()}
                   </div>
                 </div>
               </Link>
@@ -119,7 +120,7 @@ const Header = () => {
               </div>
 
               {/* Mobile icon start */}
-              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex lg:hidden justify-center items-center hover:bg-black/5 cursor-pointer relative -mr-2">
+              <div className="w-8 md:w-12 h-8 md:h-12 rounded-full flex md:hidden justify-center items-center hover:bg-black/5 cursor-pointer relative -mr-2">
                 {mobileMenu ? (
                   <VscChromeClose
                     className="text-[16px]"

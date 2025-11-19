@@ -8,21 +8,24 @@ const useCart = create(
     (set, get) => ({
       hydrated: false,
       cartItems: [],
-
       hydrate: () => set({ hydrated: true }),
 
       addItem: (data: CartItem) => {
         const { item, quantity, color, size } = data;
         const currentItems = get().cartItems; // all the items already in cart
-        const isExisting = currentItems.find(
+        const existingIndex = currentItems.findIndex(
           (cartItem) =>
             cartItem.item.id === item.id &&
             cartItem.color === color &&
             cartItem.size === size
         );
 
-        if (isExisting) {
-          toast.info("item already in cart");
+        if (existingIndex !== -1) {
+          const updatedItems = [...currentItems];
+          updatedItems[existingIndex].quantity += quantity ?? 1;
+
+          set({ cartItems: updatedItems });
+          toast.success("Quantity updated", { icon: "➕" });
           return;
         }
 
@@ -91,6 +94,9 @@ const useCart = create(
       storage: createJSONStorage(() => localStorage),
 
       skipHydration: true,
+      onRehydrateStorage: () => (state) => {
+      state?.hydrate();
+      },
     }
   )
 );

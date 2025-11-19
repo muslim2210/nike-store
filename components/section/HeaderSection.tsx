@@ -5,9 +5,10 @@ import { RiShoppingCartFill } from "react-icons/ri";
 type Props = {
   title: string;
   totalProduct: number;
+  children?: React.ReactNode;
 }
 
-export default function HeaderSection({ title, totalProduct }: Props) {
+export default function HeaderSection({ title, totalProduct, children }: Props) {
   const auth = useCustomerAuth();
 
   return (
@@ -28,16 +29,7 @@ export default function HeaderSection({ title, totalProduct }: Props) {
         </div>
       </div>
       <div className="flex h-full lg:mt-0 lg:ml-4">
-
-        <span className="sm:ml-3">
-          <button
-            type="button"
-            className="inline-flex items-center rounded-md bg-primary px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Checkout
-          </button>
-        </span>
-
+        {children}
       </div>
     </div>
   )

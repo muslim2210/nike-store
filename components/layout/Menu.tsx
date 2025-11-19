@@ -22,7 +22,7 @@ const MenuLink = ({ showCatMenu, setShowCatMenu }: Props) => {
   });
 
   return (
-    <ul className="flex flex-col lg:flex-row lg:items-center gap-5 font-medium text-black text-base p-4 border-gray-300 border-b lg:border-none">
+    <ul className="flex flex-col md:flex-row md:items-center gap-5 lg:gap-8 font-medium text-black text-base p-4 border-gray-300 border-b md:border-none">
       <li className="cursor-pointer">
         <Link href="/">Home</Link>
       </li>

@@ -8,13 +8,18 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty"
+import { useRouter } from "next/navigation";
 
 type Props = {
   title: string
   subtitle?: string
+  isSubtitle?: boolean
 }
 
-const EmptyComponent = ({ title, subtitle }: Props) => {
+const EmptyComponent = ({ title, subtitle, isSubtitle }: Props) => {
+
+  const router = useRouter();
+
   return (
     <Empty>
       <EmptyHeader>
@@ -23,14 +28,13 @@ const EmptyComponent = ({ title, subtitle }: Props) => {
         </EmptyMedia>
         <EmptyTitle>{title}</EmptyTitle>
         <EmptyDescription>
-          {subtitle || " You haven&apos;t created any projects yet. Get started by creating your first project."}
-         
+          {isSubtitle ? subtitle || " You haven&apos;t created any projects yet. Get started by creating your first project." : ""}
         </EmptyDescription>
       </EmptyHeader>
       <EmptyContent>
         <div className="flex gap-2">
-          <Button>Go to Products</Button>
-          <Button variant="outline">Back to Home</Button>
+          <Button onClick={() => router.push("/products")}>Go to Products</Button>
+          <Button onClick={() => router.push("/")} variant="outline">Back to Home</Button>
         </div>
       </EmptyContent>
     </Empty>

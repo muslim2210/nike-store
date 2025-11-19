@@ -92,9 +92,7 @@ export const useCustomerAuth = create(
       logout: () => {
         set({ token: null, customer: null });
         
-        // ❗ Reset storage persist
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (useCustomerAuth as any).persist?.clearStorage();
+        localStorage.removeItem("nike-customer-auth");
 
         document.cookie = "customer_token=; Max-Age=0; path=/;";
         delete api.defaults.headers.common["Authorization"];
@@ -105,21 +103,17 @@ export const useCustomerAuth = create(
     }),
 
     {
-      name: "nike-customer-auth", // key localStorage
+      name: "nike-customer-auth", 
+      skipHydration: true, 
       
-      // Restore token & header setelah persist load
       onRehydrateStorage: () => (state) => {
-        if (!state) return;
+        if (!state) return state;
 
-        const token = state.token;
-        if (token) {
-          api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        if (state.token) {
+          api.defaults.headers.common["Authorization"] = `Bearer ${state.token}`;
         }
 
-        // langsung fetch wishlist setelah rehydrate & login
-        if (state.customer) {
-          useWishlist.getState().fetchWishlist();
-        }
+        return state; 
       },
     }
   )
